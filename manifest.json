@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Unload Tab",
+  "version": "1.0",
+
+  "description": "Unload Tab from context menu to free up system resources. Really it is just to satisfy all of you with OCD. ;D",
+
+  "icons": {
+    "48": "border-48.png"
+  },
+
+  "background": {
+    "scripts": ["unload.js"]
+  },
+
+  "permissions": [
+    "menus"
+  ]
+}
