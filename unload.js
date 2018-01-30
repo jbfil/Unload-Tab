@@ -24,12 +24,22 @@ browser.menus.onClicked.addListener(function(info, tab) {
 				// Search for other tabs in current window
 				return browser.tabs.query({currentWindow: true})
 				.then(tabs => {
-					console.log('Unload Tab: ', tabs);
-					if (tabs.length == 1) {
-						throw new Error('Unable to unload only tab in window.');
+					if (tabs.length > 1) {
+						tabs = tabs.sort((a,b) => a.index - b.index);
+						for(var i = tab.index + 1; i < tab.index + tabs.length; ++i) {
+							var idx = i % tabs.length;
+							if(tabs[idx].discarded === false) {
+								// Set found non-discarded tab as active
+								return browser.tabs.update(tabs[idx].id, {active: true});
+							}
+						}
 					}
-					tabs = tabs.sort((a,b) => a.index - b.index);
-					return tabs[(tabs.find((cur, i) => cur.id == tab.id).index + 1) % tabs.length];
+
+					// No non-discarded tabs in this window. Open new tab
+					return browser.tabs.create({
+						active: true,
+						//url: "about:newtab",
+					})
 				})
 				// Make another tab 'active'
 				.then(tab => browser.tabs.update(tab.id, {active: true}));

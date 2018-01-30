@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Unload Tab",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "description": "Unload Tab from context menu to free up system resources. Really it is just to satisfy all of you with OCD. ;D",
 
