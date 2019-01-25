@@ -3,7 +3,18 @@
   "name": "Unload Tab",
   "version": "1.1.0",
 
+  "developer": {
+    "name": "Bogdan Filipchuk",
+    "url": "https://github.com/bogidan/Unload-Tab"
+  },
+
   "description": "Unload Tab from context menu. Disable menu item if unloaded.",
+
+  "applications": {
+    "gecko": {
+      "id": "webextension-unload-tab@boggy.me"
+    }
+  },
 
   "icons": {
     "48": "border-48.png"
@@ -13,7 +24,12 @@
     "scripts": ["unload.js"]
   },
 
+  "options_ui": {
+    "browser_style": false,
+    "page": "options/options.html"
+  },
+
   "permissions": [
-    "menus", "tabs"
+    "menus", "tabs", "storage"
   ]
 }

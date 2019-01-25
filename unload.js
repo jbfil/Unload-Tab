@@ -1,5 +1,28 @@
 var MENU_ID = 'unload-tab';
 
+var options = {
+	'new-tab-placement': 'after',
+};
+
+function option(item, values) {
+	return values[options[item]];
+}
+
+browser.storage.sync.get()
+	.then(values => {
+		Object.assign(options, values);
+		if(Object.entries(values).length === 0) {
+			return browser.storage.sync.set(options);
+		}
+	})
+	.catch(console.error)
+	.finally(() => browser.storage.onChanged.addListener((changes, area) => {
+		Object.keys(changes).forEach(key => {
+			options[key] = changes[key].newValue;
+			console.log('storage', area, 'change', key, changes[key]);
+		})
+	}));
+
 function unloadTab(item, tab) {
 	// Can't unload active tab.
 	if(tab.active) {
@@ -16,13 +39,16 @@ function unloadTab(item, tab) {
 				.reduce((acc, cur) => {
 					if(acc === undefined) return cur;
 					return adjust(cur.index) < adjust(acc.index) ? cur : acc;
-				});
+				}, undefined);
 
 			return active
 				// Set the next tab to active
 				? browser.tabs.update(active.id, {active: true})
 				// Create a new tab if all are disabled. Set it active.
-				: browser.tabs.create({active: true, index: tab.index + 1}); // Create at next slot
+				: browser.tabs.create({
+					active: true,
+					index: option('new-tab-placement', {after: tab.index + 1, last: window.tabs.length}),
+				});
 		}, console.error).then(() => browser.tabs.discard(tab.id));
 	} else {
 		return browser.tabs.discard(tab.id);
