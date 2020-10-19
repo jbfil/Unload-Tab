@@ -3,9 +3,18 @@
 
 Unload Tab from context menu to free up system resources. Really it is just to satisfy all of you with OCD. :wink:
 
-Right click menu on tab will have an option to 'Unload Tab'. This will be disabled for tabs which are already unloaded. Pages 'about:*' will not have the context menu shown as they can't be unloaded.
+Right click menu on tab will have an option to 'Unload Tab'. This will be disabled for tabs which are already unloaded. Pages 'about:\*' will not have the context menu shown as they can't be unloaded.
+
+## Todo
+- Reload options on change.
+- Support for multiple tabs selected.
 
 ## Changes
+
+### Version 1.2.0
+
+- Added option to add to page context menu.
+
 
 ### Version 1.1.0
 

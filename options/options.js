@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		browser.storage.sync.get(elm.name)
 			.then(res => {
 				elm.value = res[elm.name] || "";
+				console.log("get", elm.name, elm.value);
 				return res;
 			})
 			//.then((res) => console.log('storage * get', res), console.error);
@@ -26,6 +27,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			var values = {};
 			values[elm.name] = elm.value;
 			browser.storage.sync.set(values)
+				.then(function() {
+					console.log("set", values);
+				});
 				//.then(() => console.log('storage sync set', values), console.error);
 		});
 	});

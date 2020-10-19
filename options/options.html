@@ -8,14 +8,23 @@ body {
 h1 {
 	font-size: 1em;
 }
+img {
+	padding: 1rem;
+}
 </style>
 <script src='options.js'></script>
 
 <div>
 	<h1>Unload Tab Options</h1>
-	<p>If all tabs are unloaded. Where do I place the new tab?</p>
+	<p>If all tabs are unloaded. Where should the new tab be placed?</p>
 	<select name="new-tab-placement" title="">
 		<option value="after">After Tab being unloaded</option>
 		<option value="last">Last tab in window</option>
 	</select>
+	<p>Add to page context menu? (Usually only in tab context menu)</p>
+	<select name='page-context-menu' title="">
+		<option value="true">Add to page context menu.</option>
+		<option value="false">Only in tab context menu.</option>
+	</select>
+	<img src="page-context-menu-labels.png" height="300"></img>
 </div>
